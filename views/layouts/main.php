@@ -38,6 +38,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            ['label' => 'Distance', 'url' => ['/place/distance']],
             ['label' => 'Places', 'url' => ['/place/index']],
             ['label' => 'Add New', 'url' => ['/place/create']],
         ],

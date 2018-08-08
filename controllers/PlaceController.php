@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Areas;
 use Yii;
 use yii\web\Controller;
 use app\models\Place;
@@ -58,6 +59,23 @@ class PlaceController extends Controller
     } else {
       throw new NotFoundHttpException('The requested page does not exist.');
     }
+  }
+
+
+  public function actionDistance() {
+      $request = Yii::$app->request;
+      $result = $request->post('Areas')['areaNames'];
+
+      $model = new Areas();
+
+      if ($result == '') {
+          $isSelectedArea = false;
+          $areas = $model->getAreasSortedByName();
+      } else {
+          $isSelectedArea = true;
+          $areas = $model->getAreasSortedByDistance($result);
+      }
+      return $this->render('distance', compact('model', 'result', 'areas', 'isSelectedArea'));
   }
 
 }
